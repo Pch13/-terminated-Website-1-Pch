@@ -20,7 +20,7 @@ nav ul{
 nav ul li{
     list-style-type: none;
     display: inline-block; /*横並びにする*/
-    width: 10%; /*タイトルの間隔をきめる*/
+    width: 25%; /*タイトルの間隔をきめる*/
 }
 
 nav ul li a{
@@ -41,8 +41,9 @@ a:hover{
 }
 
 .title-all{
+    text-align: center;
     font-weight: bold;
-    font-size: 25px;
+    font-size: x-large;
     font-style: italic;
     font-family: 'Times New Roman';
 }
