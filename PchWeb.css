@@ -1,3 +1,53 @@
-.div-class{
-    color: red;
+main div{
+    background-color: rgb(255, 246, 235);
+    margin: 0;
+    padding: 0;
+    color: #050505;
+}
+
+/*ナビゲーションスタイリング　スタート*/
+nav{
+    text-align: center;
+}
+
+/*ブロックに対して*/
+nav ul{
+    margin: 0;
+    padding: 0;
+}
+
+/*ラインに対して*/
+nav ul li{
+    list-style-type: none;
+    display: inline-block; /*横並びにする*/
+    width: 10%; /*タイトルの間隔をきめる*/
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: #050505;
+    font-weight: 700;
+}
+
+/*マウスホバーで動作*/
+nav li:hover{
+    background-color: coral; /*色つけるときアニメーションつけたい＞JS処理*/
+}
+
+/*ナビゲーションスタイリング　おわり*/
+
+a:hover{
+    color: rgb(255, 246, 235);
+}
+
+.title-all{
+    font-weight: bold;
+    font-size: 25px;
+    font-style: italic;
+    font-family: 'Times New Roman';
+}
+
+.title{
+    font-weight: bold;
+    color: rgb(255, 148, 177);
 }
