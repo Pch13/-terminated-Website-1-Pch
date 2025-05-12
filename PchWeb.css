@@ -12,32 +12,41 @@ nav{
 
 /*ブロックに対して*/
 nav ul{
-    margin: 0;
+    margin: 2em;
     padding: 0;
+    background: rgb(255, 148, 177);
 }
 
-/*ラインに対して*/
+/*ブロック内の行に対して*/
 nav ul li{
     list-style-type: none;
     display: inline-block; /*横並びにする*/
-    width: 25%; /*タイトルの間隔をきめる*/
+    padding: 10px;
+	margin: 0 2em;
+    width: 18%; /*タイトルの間隔をきめる*/
 }
 
+/*行と行の要素を分けて指示する必要があるかは不明だがとりあえずわけて処理*/
 nav ul li a{
     text-decoration: none;
-    color: #050505;
+    color: rgb(255, 246, 235);
+    font-size: 18px;
     font-weight: 700;
+    transition: all .3s ease .1s;
 }
 
 /*マウスホバーで動作*/
-nav li:hover{
-    background-color: coral; /*色つけるときアニメーションつけたい＞JS処理*/
+nav ul li a:hover{
+    color: #050505;
+    transition: .3s;
 }
 
 /*ナビゲーションスタイリング　おわり*/
 
-a:hover{
-    color: rgb(255, 246, 235);
+.title{
+    padding: 2px 0 0 0;
+    font-weight: bold;
+    color: rgb(255, 148, 177);
 }
 
 .title-all{
@@ -48,7 +57,15 @@ a:hover{
     font-family: 'Times New Roman';
 }
 
-.title{
-    font-weight: bold;
-    color: rgb(255, 148, 177);
+/*横に線を追加する*/
+hr{
+    margin-bottom: 2em;
 }
+
+.line-teat{
+    background-color: rgb(255, 148, 177);
+    border: none;
+    height: 3px;
+}
+
+/*色がつかない、失敗してる*/
