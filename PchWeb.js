@@ -1,7 +1,108 @@
+//alert文テスト
 const a="これはJSです。";
 alert("THIS IS POP-UP");
 
-//WebGLの記述
+//WebGL　チュートリアル練習
+//main
+main()
+{
+const vsSource=`
+    attribute vec4 aVertexPosition;
+    uniform mat4 uModelViewMatrix;
+    uniform mat4 uProjectionMatrix;
+    void main(){
+    gl_Position=uProjectionMatrix*uModelViewMatrix*aVertexPosition;
+    }
+`;
+
+const fsSource=`
+    void main(){
+        gl_FragColor(1.0,1.0,1.0,1.0);
+    }
+`;
+
+const shaderProgram=initShaderProgram(gl, vsSource, fsSource);
+
+const programInfo={
+    program: shaderProgram,
+    attribLocations: {
+        vertexPosition: gl.getAttribLocation(shaderProgram, "aVertexPosition"),
+},
+uniformLocations:{
+    projectionMatrix: gl.getUniformLocation(shaderProgram, "uProjectionMatrix"),
+    modelViewMatrix: gl.getUniformLocation(shaderProgram, "uModelViewMatrix"),
+ },
+};
+}
+
+//function
+function main(){
+    const canvas=document.querySelector("#canvas");
+
+    const gl=canvas.getContext("webgl");
+
+    if(gl===null){
+        alert('webgl not supported.');
+        return;
+    }
+
+     gl.clearColor(0.0, 0.0, 0.0, 1.0);
+     gl.clear(gl.COLOR_BUFFER_BIT);
+}
+
+function initShaderProgram(gl, vsSource, fsSource){
+    const vertexShader=loadShader(gl, gl.VERTEX_SHADER, vsSource);
+    const fragmentShader=loadShader(gl, gl.FRAGMENT_SHADER. fsSource);
+
+    const shaderProgram=gl.createprogram();
+    gl.attachShader(shaderProgram, vertexShader);
+    gl.attachShader(shaderProgram, fragmentShader);
+    gl.linkProgram(shaderProgram);
+
+if(!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)){
+    alert(`unable to initialize the shader program.: $(gl.getProgramInfoLog(
+        shaderProgram,
+        )}`,
+    );
+    return null;
+}
+    return shaderProgram;
+
+}
+
+function loadShader(gl, type, source){
+    const shader=gl.createShader(type);
+
+gl.shaderSource(shader, source);
+gl.CompileShader(shader);
+
+if(!gl.getProgramParameter(shader, gl.COMPILE_STATUS)){
+    alert(
+        `an error occured compiling shaders: $(gl.getShaderInfoLog(shader)}`
+    ,);
+    gl.deleteShader(shader);
+
+    return null;
+    }
+    return shader;
+}
+
+
+
+/*エラーが出ました↓
+GLSL Lint: Failed to spawn 'glslangValidator' binary. 
+Error: spawn glslangValidator.exe ENOENT
+
+GLSL Lint: The shader stage could not be determined automatically.
+    Please add: 
+    '#pragma vscode_glsllint_stage: STAGE'
+    to the shader code. Where STAGE is a valid shader stage 
+    (e.g.: 'vert' or 'frag', see 'Available stages' in the docs)
+*/
+
+
+/*
+//WebGLの記述　おためし
 document.addEventListener('DOMContentLoaded', function(){
 
     //HTMLから"canvas"を受けとる
@@ -83,3 +184,4 @@ document.addEventListener('DOMContentLoaded', function(){
     gl.flush();
     
 });
+*/

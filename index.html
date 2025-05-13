@@ -12,9 +12,16 @@
     <!--リンクでファイル名指定して呼び出す-->
     <link rel="stylesheet" href="PchWeb.css">
     
-    <!--JS呼び出し　head内かbodyの末尾に記載-->
-    <script src="./PchWeb.js"></script> <!--HTMLは、バックスラッシュで閉じる-->
-    
+    <!--シェーダー呼び出し-->
+    <!--WebGLの３Dライブラリをロード-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gl-matrix/2.8.1/gl-matrix-min.js"
+    integrity="sha512-zhHQR0/H5SEBL3Wn6yYSaTTZej12z0hVZKOv3TwCUXT1z5qeqGcXJLLrbERYRScEDDpYIJhPC1fk31gqR783iQ=="
+    crossorigin="anonymous"
+    defer></script> 
+    <script src="./PchWeb.js" type="module"></script>
+
+
+
     <!--シェーダー呼び出し-->
     <!--craete vertex shader-->
     <script id="vertexShader" type="x-shader/x-vertex">
@@ -31,8 +38,7 @@
             gl_FragColor=vec4 (1.0, 1.0, 1.0, 1.0);  //ここに色情報を渡す
         }
     </script>
-
-
+    
     <title>Pch's first website</title>
 </head>    
 
@@ -50,9 +56,9 @@
         </nav>
     </header>
     <main>
-        <!--WebGL　スタート-->
-        <canvas id="canvas"></canvas>
-        <!--WebGL　終わり-->
+        <!--WebGL-->
+        <canvas id="canvas" width="640" height="480"></canvas>
+
         <article id="home">
             <div class="title">
             <h2>HOME</h2>
