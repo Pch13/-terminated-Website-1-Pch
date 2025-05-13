@@ -13,8 +13,26 @@
     <link rel="stylesheet" href="PchWeb.css">
     
     <!--JS呼び出し　head内かbodyの末尾に記載-->
-    <script src="PchWeb.js">
-    </script> <!--バックスラッシュで閉じる-->
+    <script src="./PchWeb.js"></script> <!--HTMLは、バックスラッシュで閉じる-->
+    
+    <!--シェーダー呼び出し-->
+    <!--craete vertex shader-->
+    <script id="vertexShader" type="x-shader/x-vertex">
+        attribute vec3 position;
+        void main(void){
+            gl_Position=vec4(position, 1.0); //ここに頂点情報を渡す
+        }
+    </script>
+
+    <!--craete fragment shader-->
+    <script id="fragmentShader" type="x-shader/x-fragment">
+        precision mediump float;
+        void main(void){
+            gl_FragColor=vec4 (1.0, 1.0, 1.0, 1.0);  //ここに色情報を渡す
+        }
+    </script>
+
+
     <title>Pch's first website</title>
 </head>    
 
@@ -32,6 +50,9 @@
         </nav>
     </header>
     <main>
+        <!--WebGL　スタート-->
+        <canvas id="canvas"></canvas>
+        <!--WebGL　終わり-->
         <article id="home">
             <div class="title">
             <h2>HOME</h2>
