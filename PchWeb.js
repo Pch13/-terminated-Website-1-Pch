@@ -1,28 +1,31 @@
-//alert文テスト
-const a="これはJSです。";
-alert("THIS IS POP-UP");
-
 //WebGL　チュートリアル練習
 //main
-main()
+import { initBuffers } from "./init-buffers.js";
+import { drawScene } from "./draw-scenes.js";
+
+main();
+//set vertex shader
 {
+
 const vsSource=`
     attribute vec4 aVertexPosition;
     uniform mat4 uModelViewMatrix;
     uniform mat4 uProjectionMatrix;
     void main(){
-    gl_Position=uProjectionMatrix*uModelViewMatrix*aVertexPosition;
+    gl_Position=uProjectionMatrix * uModelViewMatrix * aVertexPosition;
     }
 `;
 
+//set fragment shader
 const fsSource=`
     void main(){
-        gl_FragColor(1.0,1.0,1.0,1.0);
+        gl_FragColor=vec4(1.0, 1.0, 1.0, 1.0);
     }
 `;
 
+//initialize the shader program on main function
 const shaderProgram=initShaderProgram(gl, vsSource, fsSource);
-
+//
 const programInfo={
     program: shaderProgram,
     attribLocations: {
@@ -33,6 +36,7 @@ uniformLocations:{
     modelViewMatrix: gl.getUniformLocation(shaderProgram, "uModelViewMatrix"),
  },
 };
+
 }
 
 //function
@@ -42,23 +46,31 @@ function main(){
     const gl=canvas.getContext("webgl");
 
     if(gl===null){
-        alert('webgl not supported.');
+        alert("webgl not supported.",
+        );
         return;
     }
 
-     gl.clearColor(0.0, 0.0, 0.0, 1.0);
+     gl.clearColor(0.3, 0.5, 0.5, 1.0);
      gl.clear(gl.COLOR_BUFFER_BIT);
 }
 
+//initialize shader on GPU
 function initShaderProgram(gl, vsSource, fsSource){
     const vertexShader=loadShader(gl, gl.VERTEX_SHADER, vsSource);
-    const fragmentShader=loadShader(gl, gl.FRAGMENT_SHADER. fsSource);
+    const fragmentShader=loadShader(gl, gl.FRAGMENT_SHADER, fsSource);
 
-    const shaderProgram=gl.createprogram();
+    //create a program
+    const shaderProgram=gl.createProgram();
+
+    //attach shader onto the object of the prgoram
     gl.attachShader(shaderProgram, vertexShader);
     gl.attachShader(shaderProgram, fragmentShader);
+
+    //link above together
     gl.linkProgram(shaderProgram);
 
+    //in case of not accesible to webgl
 if(!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)){
     alert(`unable to initialize the shader program.: $(gl.getProgramInfoLog(
         shaderProgram,
@@ -70,22 +82,28 @@ if(!gl.getProgramParameter(shaderProgram, gl.LINK_STATUS)){
 
 }
 
+//create a shader
+//get shader from GPU to compile
 function loadShader(gl, type, source){
     const shader=gl.createShader(type);
 
 gl.shaderSource(shader, source);
 gl.CompileShader(shader);
 
-if(!gl.getProgramParameter(shader, gl.COMPILE_STATUS)){
+//see if compile is successful
+if(!gl.getShaderParameter(shader, gl.COMPILE_STATUS)){
     alert(
-        `an error occured compiling shaders: $(gl.getShaderInfoLog(shader)}`
-    ,);
+        `an error occured compiling shaders: $(gl.getShaderInfoLog(shader)}`,
+    );
     gl.deleteShader(shader);
 
-    return null;
+    return null; //null when compile failed
     }
     return shader;
 }
+    const buffers=initBuffers(gl);
+
+    drawScene(gl, programInfo, buffers);
 
 
 
