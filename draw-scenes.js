@@ -1,5 +1,5 @@
 //カメラに写す
-function drawScene(gl, programInfo, buffers){
+function drawScene(gl, programInfo, buffers, squareRotation){
     gl.clearColor(0.0, 0.0, 0.0, 1.0);
     gl.clearDepth(1.0);
     gl.enable(gl.DEPTH_TEST);
@@ -22,6 +22,13 @@ function drawScene(gl, programInfo, buffers){
         modelViewMatrix,
         [-0.0, 0.0, -6.0],
     );
+
+    mat4.rotate(
+        modelViewMatrix,
+        modelViewMatrix,
+        squareRotation,
+        [0, 0, 1],
+    )
 
     setPositionAttribute(gl, buffers, programInfo);
 
